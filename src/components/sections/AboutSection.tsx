@@ -11,8 +11,9 @@ export function AboutSection() {
             <div className="relative rounded-[4px] overflow-hidden aspect-[4/5] border border-glass-border shadow-[0_20px_60px_rgba(0,0,0,0.5)] group">
               <img 
                 src="/images/author/1.jpeg" 
-                alt="Simon Leviev"
+                alt="Simon Leviev - The Author"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 right-6">

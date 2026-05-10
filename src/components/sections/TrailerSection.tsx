@@ -22,8 +22,9 @@ export function TrailerSection() {
               <div className="relative group rounded-[4px] overflow-hidden aspect-[4/5] border border-glass-border shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
                 <img 
                   src={src} 
-                  alt={`Simon Leviev Moment ${i + 1}`}
+                  alt={`Simon Leviev Cinematic Moment ${i + 1}`}
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 pointer-events-none" />

@@ -96,8 +96,9 @@ export function HeroSection() {
             <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_12px_12px_4px] shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25),0_0_200px_rgba(255,122,0,0.1)] border border-gold/20 overflow-hidden">
               <img 
                 src="/images/book.jpeg" 
-                alt="The Story Behind The Man - Simon Levie"
+                alt="The Story Behind The Man - Simon Leviev Official Autobiography"
                 className="w-full h-full object-cover"
+                fetchPriority="high"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
               <div className="absolute left-0 top-0 w-[18px] h-full bg-gradient-to-r from-black/40 via-transparent to-black/20 z-[2]" />
