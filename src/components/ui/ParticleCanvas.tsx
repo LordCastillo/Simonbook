@@ -66,7 +66,10 @@ export function ParticleCanvas() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 60;
+    
+    // Optimize for mobile
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 20 : 60;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
