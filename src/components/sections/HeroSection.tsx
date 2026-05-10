@@ -5,21 +5,30 @@ import { Button } from "../ui/Button";
 import { BookOpen, Play, Globe, Film, Heart, Plane } from "lucide-react";
 
 export function HeroSection() {
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [windowSize, setWindowSize] = useState({ 
+    width: typeof window !== "undefined" ? window.innerWidth : 0, 
+    height: typeof window !== "undefined" ? window.innerHeight : 0 
+  });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   useEffect(() => {
-    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
 
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [mouseX, mouseY]);
 
   const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
@@ -50,7 +59,9 @@ export function HeroSection() {
               By Simon Leviev
             </p>
             <p className="font-body text-[1.05rem] sm:text-[1.15rem] text-beige/70 mb-9 max-w-[520px] mx-auto lg:mx-0 leading-[1.8]">
-              You’ve heard the headlines. You’ve seen the documentaries. Now hear the story from the man himself. Behind the luxury cars and jets lies a truth far more shocking than anyone imagined.
+              You’ve heard the headlines. You’ve seen the documentaries. Now
+              hear the story from the man himself. Behind the luxury cars and
+              jets lies a truth far more shocking than anyone imagined.
             </p>
 
             <div className="flex flex-wrap gap-4.5 justify-center lg:justify-start mb-9">
@@ -94,8 +105,8 @@ export function HeroSection() {
           >
             <div className="absolute -inset-[30px] rounded-full border border-gold/15 pointer-events-none animate-[glowPulse_3s_ease-in-out_infinite]" />
             <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_12px_12px_4px] shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25),0_0_200px_rgba(255,122,0,0.1)] border border-gold/20 overflow-hidden">
-              <img 
-                src="/images/book.jpeg" 
+              <img
+                src="/images/book.JPG"
                 alt="The Story Behind The Man - Simon Leviev Official Autobiography"
                 className="w-full h-full object-cover"
                 fetchPriority="high"

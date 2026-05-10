@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        'luxury-black': '#050505',
+        'deep-gold': '#d4a017',
+        'warm-orange': '#ff7a00',
+        'luxury-beige': '#f5e6c8',
+        'dark-gold': '#8b6914',
+        // Keeping previous colors in case they are used in some components to not break the build
         gold: {
           DEFAULT: '#d4a017',
           light: '#e8c547',
@@ -33,7 +39,9 @@ export default {
       },
       fontFamily: {
         display: ['Playfair Display', 'serif'],
-        body: ['Cormorant Garamond', 'serif'],
+        elegant: ['Cormorant Garamond', 'serif'],
+        body: ['Montserrat', 'sans-serif'],
+        signature: ['Great Vibes', 'cursive'],
         ui: ['Inter', 'sans-serif'],
       },
       boxShadow: {
@@ -43,6 +51,15 @@ export default {
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
         'bounce': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+      animation: {
+        'marquee': 'marquee 40s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
       }
     },
   },

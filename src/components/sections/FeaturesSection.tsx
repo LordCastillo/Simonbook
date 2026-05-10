@@ -1,11 +1,11 @@
 import { FadeIn } from '../animations/FadeIn';
-import { Book, TabletSmartphone, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 export function FeaturesSection() {
   const options = [
     {
-      icon: TabletSmartphone,
+      image: "/images/book.JPG",
       title: "Digital eBook",
       price: "$9.99",
       desc: "Instant access to the raw truth on all your devices. Perfect for immediate reading.",
@@ -13,7 +13,7 @@ export function FeaturesSection() {
       delay: 0.1
     },
     {
-      icon: Book,
+      image: "/images/book.JPG",
       title: "Premium Hardcover",
       price: "$14.99",
       desc: "A collector's edition with high-quality print and cinematic imagery. A true library piece.",
@@ -43,8 +43,13 @@ export function FeaturesSection() {
                 </div>
               )}
 
-              <div className="w-20 h-20 rounded-full bg-gold/5 border border-gold/20 flex items-center justify-center mb-8 transition-all duration-500 group-hover:bg-gold/10 group-hover:border-gold/40 group-hover:shadow-[0_0_40px_rgba(212,160,23,0.2)]">
-                <option.icon className="w-9 h-9 text-gold transition-transform duration-500 group-hover:scale-110" />
+              <div className="w-28 h-36 mb-8 relative transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gold/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm"></div>
+                <img 
+                  src={option.image} 
+                  alt={option.title}
+                  className="w-full h-full object-cover rounded-sm shadow-2xl relative z-10 border border-gold/20"
+                />
               </div>
               
               <h3 className="font-display text-[1.8rem] font-bold text-beige-light mb-3 tracking-[1px]">

@@ -65,7 +65,7 @@ export function ParticleCanvas() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let particles: Particle[] = [];
+    const particles: Particle[] = [];
     
     // Optimize for mobile
     const isMobile = window.innerWidth < 768;

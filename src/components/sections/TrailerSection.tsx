@@ -1,39 +1,70 @@
-import { FadeIn } from '../animations/FadeIn';
+import { useState } from "react";
+import { FadeIn } from "../animations/FadeIn";
 
 export function TrailerSection() {
-  const images = [
-    "/images/author/1.jpeg",
-    "/images/author/2.jpeg",
-    "/images/author/3.jpeg",
-    "/images/author/4.jpeg"
-  ];
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section id="trailer" className="py-[80px] lg:py-[100px] px-8 md:px-[60px] relative">
-      <FadeIn className="text-center mb-[50px] lg:mb-[70px]">
-        <p className="font-ui text-[0.7rem] tracking-[5px] uppercase text-gold mb-3">Cinematic Moments</p>
-        <h2 className="font-display text-[2.4rem] lg:text-[clamp(2.4rem,4vw,3.6rem)] font-extrabold text-beige-light">A Life in <span className="text-gold italic">Frames</span></h2>
-      </FadeIn>
+    <section
+      id="trailer"
+      className="relative py-32 overflow-hidden bg-luxury-black"
+    >
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-deep-gold/30 to-transparent"></div>
 
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {images.map((src, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div className="relative group rounded-[4px] overflow-hidden aspect-[4/5] border border-glass-border shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-                <img 
-                  src={src} 
-                  alt={`Simon Leviev Cinematic Moment ${i + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  loading="lazy"
-                  width="400"
-                  height="500"
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <FadeIn className="text-center mb-16">
+          <p className="font-body text-xs uppercase tracking-[0.3em] text-deep-gold mb-4">
+            The Story Behind The Man
+          </p>
+          <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-luxury-beige">
+            Official Trailer
+          </h3>
+        </FadeIn>
+
+        <FadeIn delay={0.2} className="relative max-w-5xl mx-auto">
+          <div className="relative aspect-video rounded-sm overflow-hidden border border-deep-gold/20 shadow-gold-intense group">
+            {!isPlaying ? (
+              <>
+                {/* Poster Image */}
+                <img
+                  src="/images/info-book.jpg"
+                  alt="Trailer Cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 border-2 border-gold/0 group-hover:border-gold/30 transition-all duration-500 pointer-events-none" />
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-luxury-black/40 transition-opacity duration-300 group-hover:bg-luxury-black/20"></div>
+
+                {/* Play Button */}
+                <button
+                  onClick={() => setIsPlaying(true)}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full glass-strong flex items-center justify-center text-deep-gold hover:text-luxury-beige hover:border-deep-gold gold-glow-hover transition-all duration-300 z-10 cursor-pointer"
+                  aria-label="Play Trailer"
+                >
+                  <svg
+                    className="w-8 h-8 md:w-12 md:h-12 ml-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </>
+            ) : (
+              /* Video Player */
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Official Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              ></iframe>
+            )}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

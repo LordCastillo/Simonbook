@@ -3,21 +3,25 @@ import type { ReactNode } from 'react';
 import { m, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
   href?: string;
+  onClick?: React.MouseEventHandler<any>;
+  [key: string]: any;
 }
 
 export function Button({ children, variant = 'primary', className, href, ...props }: ButtonProps) {
-  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const ref = useRef<any>(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
@@ -56,7 +60,7 @@ export function Button({ children, variant = 'primary', className, href, ...prop
       }
     }
     if (props.onClick) {
-      props.onClick(e as any);
+      (props.onClick as React.MouseEventHandler)(e);
     }
   };
 
@@ -69,8 +73,9 @@ export function Button({ children, variant = 'primary', className, href, ...prop
   const Component = href ? m.a : m.button;
 
   return (
+    // @ts-ignore
     <Component
-      ref={ref as any}
+      ref={ref}
       href={href}
       onClick={handleClick}
       onMouseMove={handleMouseMove}
@@ -81,7 +86,7 @@ export function Button({ children, variant = 'primary', className, href, ...prop
         variant === 'primary' ? primaryStyles : secondaryStyles,
         className
       )}
-      {...(props as any)}
+      {...props}
     >
       {children}
     </Component>
