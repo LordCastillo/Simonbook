@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FadeIn } from "../animations/FadeIn";
 import { Button } from "../ui/Button";
 import { BookOpen, Play, Globe, Film, Heart, Plane } from "lucide-react";
@@ -88,7 +88,7 @@ export function HeroSection() {
           delay={0.2}
           className="order-1 lg:order-2 relative flex items-center justify-center [perspective:1200px] z-[3]"
         >
-          <motion.div
+          <m.div
             style={{ rotateY, rotateX }}
             className="relative w-[220px] h-[310px] sm:w-[280px] sm:h-[390px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-[floatBook_6s_ease-in-out_infinite]"
           >
@@ -99,11 +99,13 @@ export function HeroSection() {
                 alt="The Story Behind The Man - Simon Leviev Official Autobiography"
                 className="w-full h-full object-cover"
                 fetchPriority="high"
+                width="380"
+                height="520"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
               <div className="absolute left-0 top-0 w-[18px] h-full bg-gradient-to-r from-black/40 via-transparent to-black/20 z-[2]" />
             </div>
-          </motion.div>
+          </m.div>
           <div className="absolute bottom-[10%] -right-[5%] text-[6rem] lg:text-[8rem] text-white/5 pointer-events-none z-0 -rotate-12">
             <Plane className="w-full h-full" />
           </div>

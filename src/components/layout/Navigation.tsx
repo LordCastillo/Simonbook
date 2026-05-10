@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   AnimatePresence,
-  motion,
+  m,
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
@@ -153,7 +153,7 @@ export function Navigation() {
       {/* NAVBAR */}
       {/* ========================================= */}
 
-      <motion.nav
+      <m.nav
         initial={{ y: -120 }}
         animate={{ y: 0 }}
         transition={{
@@ -230,7 +230,7 @@ export function Navigation() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </m.nav>
 
       {/* ========================================= */}
       {/* MOBILE MENU */}
@@ -238,14 +238,14 @@ export function Navigation() {
 
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-[30px] lg:hidden"
           >
-            <motion.div
+            <m.div
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
@@ -256,7 +256,7 @@ export function Navigation() {
               className="flex flex-col items-center gap-8"
             >
               {NAV_ITEMS.map((item, index) => (
-                <motion.a
+                <m.a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
@@ -274,10 +274,10 @@ export function Navigation() {
                   )}
                 >
                   {item.label}
-                </motion.a>
+                </m.a>
               ))}
 
-              <motion.a
+              <m.a
                 href="#order"
                 onClick={(e) => handleScroll(e, "#order")}
                 initial={{ opacity: 0 }}
@@ -286,9 +286,9 @@ export function Navigation() {
                 className="mt-4 border border-gold px-8 py-4 font-ui text-[0.8rem] font-semibold uppercase tracking-[3px] text-gold transition-all duration-300 hover:bg-gold hover:text-black"
               >
                 Order Now
-              </motion.a>
-            </motion.div>
-          </motion.div>
+              </m.a>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

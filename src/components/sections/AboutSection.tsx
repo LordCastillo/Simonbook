@@ -14,6 +14,8 @@ export function AboutSection() {
                 alt="Simon Leviev - The Author"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
+                width="600"
+                height="750"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 right-6">

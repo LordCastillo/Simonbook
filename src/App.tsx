@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { AmbientGlow } from './components/ui/AmbientGlow';
 import { ParticleCanvas } from './components/ui/ParticleCanvas';
@@ -19,7 +20,7 @@ function App() {
   useSmoothScroll();
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <AmbientGlow />
       <ParticleCanvas />
       
@@ -39,7 +40,7 @@ function App() {
       </main>
 
       <Footer />
-    </>
+    </LazyMotion>
   );
 }
 

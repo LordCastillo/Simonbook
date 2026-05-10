@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { m, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,14 +12,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ children, variant = 'primary', className, href, ...props }: ButtonProps) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -28,6 +33,7 @@ export function Button({ children, variant = 'primary', className, href, ...prop
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     x.set(0);
     y.set(0);
   };
@@ -60,7 +66,7 @@ export function Button({ children, variant = 'primary', className, href, ...prop
   
   const secondaryStyles = "bg-transparent text-beige border-[1.5px] border-gold/50 hover:border-gold hover:bg-gold/10 hover:shadow-[0_0_40px_rgba(212,160,23,0.2)] hover:-translate-y-[3px] backdrop-blur-md font-semibold";
 
-  const Component = href ? motion.a : motion.button;
+  const Component = href ? m.a : m.button;
 
   return (
     <Component
@@ -69,7 +75,7 @@ export function Button({ children, variant = 'primary', className, href, ...prop
       onClick={handleClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ x: mouseXSpring, y: mouseYSpring }}
+      style={{ x: !isMobile ? mouseXSpring : 0, y: !isMobile ? mouseYSpring : 0 }}
       className={cn(
         baseStyles,
         variant === 'primary' ? primaryStyles : secondaryStyles,

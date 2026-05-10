@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { FadeIn } from '../animations/FadeIn';
 
 export function ReviewsSection() {
@@ -48,7 +48,7 @@ export function ReviewsSection() {
       </FadeIn>
 
       <div className="relative flex overflow-hidden group">
-        <motion.div
+        <m.div
           animate={{
             x: [0, "-50%"]
           }}
@@ -77,7 +77,7 @@ export function ReviewsSection() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </m.div>
         
         {/* Ambient Overlays for depth */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-[2] pointer-events-none" />
