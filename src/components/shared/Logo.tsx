@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { motion } from "framer-motion";
 
 const Logo = ({
   handleScroll,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleScroll: (e: any, href: string) => void;
+  handleScroll: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => void;
 }) => {
-  const onLogoClick = (e: any) => handleScroll(e, "#hero");
+  const onLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => handleScroll(e, "#hero");
 
   return (
     <motion.a

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { FadeIn } from "../animations/FadeIn";
 import SocialMedia from "../shared/SocialMedia";
 import Logo from "../shared/Logo";
@@ -12,14 +12,10 @@ export function Footer() {
     { label: "The Lifestyle", href: "#double-life" },
   ];
 
-  const legalLinks = [
-    { label: "Privacy Policy", href: "#privacy" },
-    { label: "Terms of Service", href: "#terms" },
-    { label: "Cookie Policy", href: "#cookies" },
-  ];
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleScroll = (e: any, href: string) => {
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
@@ -41,8 +37,7 @@ export function Footer() {
           {/* Column 1: Brand & Social */}
           <FadeIn className="flex flex-col gap-8">
             <div className="scale-90 origin-left">
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              <Logo handleScroll={handleScroll as any} />
+              <Logo handleScroll={handleScroll} />
             </div>
             <p className="font-body text-sm text-luxury-beige/50 leading-relaxed max-w-xs">
               Unveiling the truth behind the enigma. Experience the luxury, the
@@ -104,28 +99,6 @@ export function Footer() {
               </a>
             </div>
           </FadeIn>
-
-          {/* Column 4: Legal */}
-          {/* <FadeIn delay={0.3} className="flex flex-col gap-8">
-            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Legal</h3>
-            <ul className="flex flex-col gap-4">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="font-ui text-sm text-luxury-beige/40 hover:text-deep-gold transition-all duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-4 p-4 rounded-lg bg-deep-gold/5 border border-deep-gold/10">
-              <p className="text-[10px] leading-relaxed text-luxury-beige/30 italic">
-                Disclaimer: This publication is based on historical events. Names and details have been preserved for authenticity.
-              </p>
-            </div>
-          </FadeIn> */}
         </div>
 
         {/* Bottom Bar */}

@@ -45,19 +45,57 @@ export function TrailerSection() {
               <div className="absolute inset-0 bg-luxury-black/20 transition-opacity duration-300 group-hover:bg-transparent"></div>
 
               {/* Play Button */}
-              <button
-                onClick={() => setIsPlaying(true)}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full glass-strong flex items-center justify-center text-deep-gold hover:text-luxury-beige hover:border-deep-gold gold-glow-hover transition-all duration-300 z-10 cursor-pointer"
-                aria-label="Play Trailer"
-              >
-                <svg
-                  className="w-8 h-8 md:w-12 md:h-12 ml-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+              {!isPlaying && (
+                <button
+                  onClick={() => setIsPlaying(true)}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full glass-strong flex items-center justify-center text-deep-gold hover:text-luxury-beige hover:border-deep-gold gold-glow-hover transition-all duration-300 z-10 cursor-pointer"
+                  aria-label="Play Trailer"
                 >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
+                  <svg
+                    className="w-8 h-8 md:w-12 md:h-12 ml-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Video Overlay / Modal */}
+              {isPlaying && (
+                <div className="absolute inset-0 z-50 bg-black flex items-center justify-center">
+                  <button
+                    onClick={() => setIsPlaying(false)}
+                    className="absolute top-4 right-4 text-white hover:text-deep-gold transition-colors z-[60]"
+                  >
+                    <svg
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <div className="w-full h-full p-4 md:p-12">
+                    {/* Placeholder for actual video - can be an iframe or video tag */}
+                    <div className="w-full h-full bg-neutral-900 rounded-lg flex flex-col items-center justify-center border border-deep-gold/20">
+                      <div className="w-20 h-20 border-4 border-deep-gold border-t-transparent rounded-full animate-spin mb-6"></div>
+                      <p className="font-display text-2xl text-deep-gold animate-pulse">
+                        STREAMING EXPERIENCE LOADING...
+                      </p>
+                      <p className="font-body text-sm text-luxury-beige/40 mt-2">
+                        Official Trailer Connection Establishing
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </FadeIn>
