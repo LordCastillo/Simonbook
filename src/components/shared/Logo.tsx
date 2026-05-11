@@ -62,8 +62,8 @@ const Logo = ({
 
 
       {/* Brand Text - "IMON LEVIEV" (Logo acts as the S) */}
-      <div className="relative overflow-hidden ml-[-12px] sm:ml-[-16px] pl-[18px] sm:pl-[24px] pr-3 sm:pr-4 py-1.5 sm:py-2 bg-black/20 backdrop-blur-sm rounded-r-full border-y border-r border-gold/10 transition-all duration-500 group-hover:border-gold/30 group-hover:bg-black/40">
-        <span className="hidden min-[400px]:block font-elegant text-base sm:text-lg md:text-xl text-gradient-gold tracking-[0.2em] sm:tracking-[0.3em] opacity-90 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap">
+      <div className="hidden sm:block relative overflow-hidden ml-[-12px] sm:ml-[-16px] pl-[18px] sm:pl-[24px] pr-3 sm:pr-4 py-1.5 sm:py-2 bg-black/20 backdrop-blur-sm rounded-r-full border-y border-r border-gold/10 transition-all duration-500 group-hover:border-gold/30 group-hover:bg-black/40">
+        <span className="font-elegant text-base sm:text-lg md:text-xl text-gradient-gold tracking-[0.2em] sm:tracking-[0.3em] opacity-90 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap">
           IMON LEVIEV
         </span>
         
