@@ -13,7 +13,6 @@ export function Footer() {
   ];
 
   const legalLinks = [
-
     { label: "Privacy Policy", href: "#privacy" },
     { label: "Terms of Service", href: "#terms" },
     { label: "Cookie Policy", href: "#cookies" },
@@ -38,7 +37,7 @@ export function Footer() {
       <div className="absolute bottom-0 right-0 w-1/2 h-full bg-orange-glow/2 blur-[150px] rounded-full pointer-events-none opacity-50"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-8 mb-24">
           {/* Column 1: Brand & Social */}
           <FadeIn className="flex flex-col gap-8">
             <div className="scale-90 origin-left">
@@ -46,17 +45,22 @@ export function Footer() {
               <Logo handleScroll={handleScroll as any} />
             </div>
             <p className="font-body text-sm text-luxury-beige/50 leading-relaxed max-w-xs">
-              Unveiling the truth behind the enigma. Experience the luxury, the controversy, and the untold story of Simon Leviev.
+              Unveiling the truth behind the enigma. Experience the luxury, the
+              controversy, and the untold story of Simon Leviev.
             </p>
             <div className="pt-4 border-t border-luxury-beige/10">
-              <p className="font-elegant text-xs text-deep-gold uppercase tracking-[0.2em] mb-4">Connect With Me</p>
+              <p className="font-elegant text-xs text-deep-gold uppercase tracking-[0.2em] mb-4">
+                Connect With Me
+              </p>
               <SocialMedia />
             </div>
           </FadeIn>
 
           {/* Column 2: Quick Links */}
           <FadeIn delay={0.1} className="flex flex-col gap-8">
-            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Quick Links</h3>
+            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">
+              Quick Links
+            </h3>
             <ul className="flex flex-col gap-4">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -65,7 +69,6 @@ export function Footer() {
                     onClick={(e) => handleScroll(e, link.href)}
                     className="font-ui text-sm text-luxury-beige/40 hover:text-deep-gold transition-all duration-300 flex items-center gap-2 group"
                   >
-
                     <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-deep-gold" />
                     {link.label}
                   </a>
@@ -76,28 +79,34 @@ export function Footer() {
 
           {/* Column 3: Support & Contact */}
           <FadeIn delay={0.2} className="flex flex-col gap-8">
-            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Contact</h3>
+            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">
+              Contact
+            </h3>
             <div className="flex flex-col gap-6">
               <p className="font-body text-sm text-luxury-beige/40">
                 For inquiries, press, or booking information:
               </p>
-              <a 
-                href="mailto:Info@simonleviev.com" 
+              <a
+                href="mailto:Info@simonleviev.com"
                 className="flex items-center gap-3 p-4 rounded-xl glass border border-deep-gold/10 hover:border-deep-gold/30 transition-all duration-500 group"
               >
                 <div className="w-10 h-10 rounded-full bg-deep-gold/10 flex items-center justify-center text-deep-gold group-hover:bg-deep-gold group-hover:text-black transition-all duration-500">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] text-deep-gold/60 uppercase tracking-widest">Official Email</p>
-                  <p className="text-sm font-ui text-luxury-beige group-hover:text-deep-gold transition-colors">Info@simonleviev.com</p>
+                  <p className="text-[10px] text-deep-gold/60 uppercase tracking-widest">
+                    Official Email
+                  </p>
+                  <p className="text-sm font-ui text-luxury-beige group-hover:text-deep-gold transition-colors">
+                    Info@simonleviev.com
+                  </p>
                 </div>
               </a>
             </div>
           </FadeIn>
 
           {/* Column 4: Legal */}
-          <FadeIn delay={0.3} className="flex flex-col gap-8">
+          {/* <FadeIn delay={0.3} className="flex flex-col gap-8">
             <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Legal</h3>
             <ul className="flex flex-col gap-4">
               {legalLinks.map((link) => (
@@ -116,17 +125,18 @@ export function Footer() {
                 Disclaimer: This publication is based on historical events. Names and details have been preserved for authenticity.
               </p>
             </div>
-          </FadeIn>
+          </FadeIn> */}
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-12 mt-12 border-t border-luxury-beige/10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <p className="font-body text-xs text-luxury-beige/30 tracking-widest">
-              &copy; {new Date().getFullYear()} SIMON LEVIEV ENTERPRISE. ALL RIGHTS RESERVED.
+              &copy; {new Date().getFullYear()} SIMON LEVIEV ENTERPRISE. ALL
+              RIGHTS RESERVED.
             </p>
           </div>
-          
+
           <div className="flex items-center gap-6">
             <span className="w-1.5 h-1.5 rounded-full bg-deep-gold animate-pulse"></span>
             <p className="font-ui text-[10px] text-luxury-beige/40 uppercase tracking-[0.2em]">
@@ -136,7 +146,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-
   );
 }
-
