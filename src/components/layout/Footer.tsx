@@ -1,77 +1,143 @@
-import { FadeIn } from '../animations/FadeIn';
+import { FadeIn } from "../animations/FadeIn";
+import SocialMedia from "../shared/SocialMedia";
+import Logo from "../shared/Logo";
+import { Mail, ArrowRight } from "lucide-react";
 
 export function Footer() {
-  const footerLinks = [
-    { label: 'The Journey', href: '#story' },
-    { label: 'The Lifestyle', href: '#double-life' },
-    { label: 'The Author', href: '#author' },
-    { label: 'The Trailer', href: '#trailer' },
+  const quickLinks = [
+    { label: "The Journey", href: "#story" },
+    { label: "Buy now", href: "#order" },
+    { label: "Reviews", href: "#reviews" },
+    { label: "The Lifestyle", href: "#double-life" },
   ];
 
+  const supportLinks = [
+    { label: "FAQ", href: "#faq" },
+    { label: "Press Kit", href: "#press" },
+    { label: "Contact Us", href: "mailto:Info@simonleviev.com" },
+  ];
+
+  const legalLinks = [
+    { label: "Privacy Policy", href: "#privacy" },
+    { label: "Terms of Service", href: "#terms" },
+    { label: "Cookie Policy", href: "#cookies" },
+  ];
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <footer className="relative bg-luxury-black overflow-hidden pt-24 pb-12">
+    <footer className="relative bg-black overflow-hidden pt-32 pb-12">
       {/* Top Gradient Border */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-deep-gold/50 to-transparent"></div>
-      
-      {/* Ambient Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-deep-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-deep-gold/50 to-transparent"></div>
+
+      {/* Ambient Background Glows */}
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-deep-gold/2 blur-[150px] rounded-full pointer-events-none opacity-50"></div>
+      <div className="absolute bottom-0 right-0 w-1/2 h-full bg-orange-glow/2 blur-[150px] rounded-full pointer-events-none opacity-50"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <FadeIn className="flex flex-col items-center text-center mb-16">
-          <h2 className="font-signature text-5xl md:text-7xl text-deep-gold mb-6 drop-shadow-gold">
-            Simon Leviev
-          </h2>
-          <p className="font-body text-sm md:text-base text-luxury-beige/60 uppercase tracking-[0.3em] max-w-md mx-auto">
-            The Story Behind The Man
-          </p>
-        </FadeIn>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center border-t border-luxury-beige/10 pt-12">
-          {/* Navigation Links */}
-          <FadeIn delay={0.2} className="flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-4">
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-ui text-sm text-luxury-beige/50 hover:text-deep-gold transition-colors duration-300 relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-deep-gold transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-          </FadeIn>
-
-          {/* Social Icons */}
-          <FadeIn delay={0.3} className="flex justify-center gap-4">
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="w-12 h-12 rounded-full glass flex items-center justify-center text-luxury-beige/60 hover:text-deep-gold hover:border-deep-gold/40 gold-glow-hover transition-all duration-300"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </svg>
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="w-12 h-12 rounded-full glass flex items-center justify-center text-luxury-beige/60 hover:text-deep-gold hover:border-deep-gold/40 gold-glow-hover transition-all duration-300"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </svg>
-            </a>
-          </FadeIn>
-
-          {/* Copyright */}
-          <FadeIn delay={0.4} className="text-center md:text-right">
-            <p className="font-body text-xs text-luxury-beige/30">
-              &copy; {new Date().getFullYear()} Simon Leviev.<br />
-              All rights reserved.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-8 mb-24">
+          {/* Column 1: Brand & Social */}
+          <FadeIn className="flex flex-col gap-8">
+            <div className="scale-90 origin-left">
+              <Logo handleScroll={handleScroll} />
+            </div>
+            <p className="font-body text-sm text-luxury-beige/50 leading-relaxed max-w-xs">
+              Unveiling the truth behind the enigma. Experience the luxury, the controversy, and the untold story of Simon Leviev.
             </p>
+            <div className="pt-4 border-t border-luxury-beige/10">
+              <p className="font-elegant text-xs text-deep-gold uppercase tracking-[0.2em] mb-4">Connect With Me</p>
+              <SocialMedia />
+            </div>
           </FadeIn>
+
+          {/* Column 2: Quick Links */}
+          <FadeIn delay={0.1} className="flex flex-col gap-8">
+            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Quick Links</h3>
+            <ul className="flex flex-col gap-4">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleScroll(e, link.href)}
+                    className="font-ui text-sm text-luxury-beige/40 hover:text-deep-gold transition-all duration-300 flex items-center gap-2 group"
+                  >
+                    <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-deep-gold" />
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+
+          {/* Column 3: Support & Contact */}
+          <FadeIn delay={0.2} className="flex flex-col gap-8">
+            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Contact</h3>
+            <div className="flex flex-col gap-6">
+              <p className="font-body text-sm text-luxury-beige/40">
+                For inquiries, press, or booking information:
+              </p>
+              <a 
+                href="mailto:Info@simonleviev.com" 
+                className="flex items-center gap-3 p-4 rounded-xl glass border border-deep-gold/10 hover:border-deep-gold/30 transition-all duration-500 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-deep-gold/10 flex items-center justify-center text-deep-gold group-hover:bg-deep-gold group-hover:text-black transition-all duration-500">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] text-deep-gold/60 uppercase tracking-widest">Official Email</p>
+                  <p className="text-sm font-ui text-luxury-beige group-hover:text-deep-gold transition-colors">Info@simonleviev.com</p>
+                </div>
+              </a>
+            </div>
+          </FadeIn>
+
+          {/* Column 4: Legal */}
+          <FadeIn delay={0.3} className="flex flex-col gap-8">
+            <h3 className="font-elegant text-xl text-luxury-beige tracking-widest uppercase">Legal</h3>
+            <ul className="flex flex-col gap-4">
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="font-ui text-sm text-luxury-beige/40 hover:text-deep-gold transition-all duration-300"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 p-4 rounded-lg bg-deep-gold/5 border border-deep-gold/10">
+              <p className="text-[10px] leading-relaxed text-luxury-beige/30 italic">
+                Disclaimer: This publication is based on historical events. Names and details have been preserved for authenticity.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-12 mt-12 border-t border-luxury-beige/10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
+            <p className="font-body text-xs text-luxury-beige/30 tracking-widest">
+              &copy; {new Date().getFullYear()} SIMON LEVIEV ENTERPRISE. ALL RIGHTS RESERVED.
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-deep-gold animate-pulse"></span>
+            <p className="font-ui text-[10px] text-luxury-beige/40 uppercase tracking-[0.2em]">
+              Designed for the extraordinary
+            </p>
+          </div>
         </div>
       </div>
     </footer>
+
   );
 }
+
