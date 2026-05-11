@@ -11,7 +11,7 @@ export function TrailerSection() {
     >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-deep-gold/30 to-transparent"></div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-6 lg:px-12">
         <FadeIn className="text-center mb-16">
           <p className="font-body text-xs uppercase tracking-[0.3em] text-deep-gold mb-4">
             The Story Behind The Man
@@ -21,10 +21,10 @@ export function TrailerSection() {
           </h3>
         </FadeIn>
 
-        <FadeIn delay={0.2} className="relative max-w-5xl mx-auto">
+        <FadeIn delay={0.2} className="relative container mx-auto">
           <div className="relative aspect-video rounded-sm overflow-hidden border border-deep-gold/20 shadow-gold-intense group">
             {!isPlaying ? (
-              <>
+              <div className="w-full h-full">
                 {/* Poster Image */}
                 <img
                   src="/images/info-book.jpg"
@@ -49,13 +49,13 @@ export function TrailerSection() {
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </button>
-              </>
+              </div>
             ) : (
               /* Video Player */
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                src="https://www.youtube.com/embed/fD27o39Zk94?autoplay=1"
                 title="Official Trailer"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

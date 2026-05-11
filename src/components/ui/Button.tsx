@@ -3,17 +3,15 @@ import type { ReactNode } from 'react';
 import { m, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
   href?: string;
-  onClick?: React.MouseEventHandler<any>;
-  [key: string]: any;
 }
 
-export function Button({ children, variant = 'primary', className, href, ...props }: ButtonProps) {
-  const ref = useRef<any>(null);
+export function Button({ children, variant = 'primary', className, href, onClick, ...props }: ButtonProps) {
+  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -59,8 +57,8 @@ export function Button({ children, variant = 'primary', className, href, ...prop
         });
       }
     }
-    if (props.onClick) {
-      (props.onClick as React.MouseEventHandler)(e);
+    if (onClick) {
+      (onClick as React.MouseEventHandler)(e);
     }
   };
 
@@ -73,9 +71,10 @@ export function Button({ children, variant = 'primary', className, href, ...prop
   const Component = href ? m.a : m.button;
 
   return (
-    // @ts-ignore
+    // @ts-expect-error - Framer motion type complexity with generic Component
     <Component
-      ref={ref}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref={ref as any}
       href={href}
       onClick={handleClick}
       onMouseMove={handleMouseMove}
@@ -92,3 +91,4 @@ export function Button({ children, variant = 'primary', className, href, ...prop
     </Component>
   );
 }
+

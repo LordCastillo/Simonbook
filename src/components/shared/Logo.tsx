@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
 
 const Logo = ({
   handleScroll,
 }: {
-  handleScroll: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleScroll: (e: any, href: string) => void;
 }) => {
+  const onLogoClick = (e: any) => handleScroll(e, "#hero");
+
   return (
     <motion.a
       href="#hero"
-      onClick={(e) => handleScroll(e, "#hero")}
+      onClick={onLogoClick}
+
+
+
       className="relative flex items-center group cursor-pointer"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
