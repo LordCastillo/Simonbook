@@ -20,7 +20,7 @@ const Logo = ({
       whileTap={{ scale: 0.98 }}
     >
       {/* The "S" Logo Icon */}
-      <div className="relative w-11 h-11 md:w-13 md:h-13 z-20">
+      <div className="relative w-9 h-9 sm:w-11 sm:h-11 md:w-13 md:h-13 z-20">
         {/* Continuous Pulsing Aura */}
         <motion.div 
           animate={{ 
@@ -62,8 +62,8 @@ const Logo = ({
 
 
       {/* Brand Text - "IMON LEVIEV" (Logo acts as the S) */}
-      <div className="relative overflow-hidden ml-[-12px] pl-[20px] pr-4 py-2 bg-black/20 backdrop-blur-sm rounded-r-full border-y border-r border-gold/10 transition-all duration-500 group-hover:border-gold/30 group-hover:bg-black/40">
-        <span className="hidden sm:block font-elegant text-lg md:text-xl text-gradient-gold tracking-[0.3em] opacity-90 group-hover:opacity-100 transition-all duration-500">
+      <div className="relative overflow-hidden ml-[-8px] sm:ml-[-12px] pl-[14px] sm:pl-[20px] pr-3 sm:pr-4 py-1.5 sm:py-2 bg-black/20 backdrop-blur-sm rounded-r-full border-y border-r border-gold/10 transition-all duration-500 group-hover:border-gold/30 group-hover:bg-black/40">
+        <span className="hidden min-[400px]:block font-elegant text-base sm:text-lg md:text-xl text-gradient-gold tracking-[0.2em] sm:tracking-[0.3em] opacity-90 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap">
           IMON LEVIEV
         </span>
         
