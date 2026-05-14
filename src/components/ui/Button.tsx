@@ -3,11 +3,13 @@ import type { ReactNode } from 'react';
 import { m, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export function Button({ children, variant = 'primary', className, href, onClick, ...props }: ButtonProps) {
@@ -76,9 +78,9 @@ export function Button({ children, variant = 'primary', className, href, onClick
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       href={href}
-      onClick={handleClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onClick={handleClick as any}
+      onMouseMove={handleMouseMove as any}
+      onMouseLeave={handleMouseLeave as any}
       style={{ x: !isMobile ? mouseXSpring : 0, y: !isMobile ? mouseYSpring : 0 }}
       className={cn(
         baseStyles,

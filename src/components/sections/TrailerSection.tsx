@@ -66,7 +66,7 @@ export function TrailerSection() {
                 <div className="absolute inset-0 z-50 bg-black flex items-center justify-center">
                   <button
                     onClick={() => setIsPlaying(false)}
-                    className="absolute top-4 right-4 text-white hover:text-deep-gold transition-colors z-[60]"
+                    className="absolute top-4 right-4 text-white hover:text-deep-gold transition-colors z-60"
                   >
                     <svg
                       className="w-8 h-8"
@@ -82,17 +82,13 @@ export function TrailerSection() {
                       />
                     </svg>
                   </button>
-                  <div className="w-full h-full p-4 md:p-12">
-                    {/* Placeholder for actual video - can be an iframe or video tag */}
-                    <div className="w-full h-full bg-neutral-900 rounded-lg flex flex-col items-center justify-center border border-deep-gold/20">
-                      <div className="w-20 h-20 border-4 border-deep-gold border-t-transparent rounded-full animate-spin mb-6"></div>
-                      <p className="font-display text-2xl text-deep-gold animate-pulse">
-                        STREAMING EXPERIENCE LOADING...
-                      </p>
-                      <p className="font-body text-sm text-luxury-beige/40 mt-2">
-                        Official Trailer Connection Establishing
-                      </p>
-                    </div>
+                  <div className="w-full h-full">
+                    <iframe
+                      src="https://drive.google.com/file/d/1A0RLjKcakIagrqyjaQdsVkm5z2uj4IiS/preview"
+                      className="w-full h-full border-none"
+                      allow="autoplay"
+                      allowFullScreen
+                    ></iframe>
                   </div>
                 </div>
               )}

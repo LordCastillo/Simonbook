@@ -10,7 +10,8 @@ export function FeaturesSection() {
       price: "$9.99",
       desc: "Instant access to the raw truth on all your devices. Perfect for immediate reading.",
       tag: "Instant Download",
-      delay: 0.1
+      delay: 0.1,
+      link: "https://www.amazon.com/dp/B0H1FL4DRC/ref=mp_s_a_1_1?crid=3BSVW4YNVCCVD&dib=eyJ2IjoiMSJ9.XINFM6aRLMyXkkppr1MqUlBBwwYIgoCrKA8fFLF0mUVfF3FOentCMyxvT1Y7FmBpEzRf8yz5zeT5g_5IhFwY-DqRFlMfpDVdz-uQoS-shltKasQNW-OZ-PqppUO1FOYoRMOEsAZ34l1sBlV3vzI7T5CCpjw24zcQwuWOyqQ1e7tgZcJwQk3R-Set_Nk-tViA92fjuGK6c73YI672UtGdWA.qJH6oIcyHKUMwONvlPEe76gOS37_t007XlAswT0nREk&dib_tag=se&keywords=simon+leviev&qid=1778596156&sprefix=simon+leviev,aps,205&sr=8-1&fbclid=PAVERFWARzCFhleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacMHDjNgLH_pcdIxUfxgJCs_EgKawz7jIwv5wgG6ZgBE4i6iIyUzmpemtobUQ_aem_MMHu8u7StrTaM0dzwrL03g"
     },
     {
       image: "/images/book.JPG",
@@ -19,7 +20,8 @@ export function FeaturesSection() {
       desc: "A collector's edition with high-quality print and cinematic imagery. A true library piece.",
       tag: "Exclusive Print",
       delay: 0.25,
-      featured: true
+      featured: true,
+      link: "https://www.amazon.com/dp/9655970272?ref=sp_email&fbclid=PAVERFWARzCIRleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacglHCow61DGsEu7PVBuK6DMDRe6occkKNuVe_ILbt992sxc8ZNxsK_N_6I1w_aem_2C0MjyKcooYF379violV-A"
     }
   ];
 
@@ -72,6 +74,9 @@ export function FeaturesSection() {
                 <Button 
                   className="w-full justify-center gap-3 py-4 text-[0.8rem] tracking-[3px]"
                   variant={option.featured ? "primary" : "secondary"}
+                  href={option.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <ShoppingCart className="w-4 h-4" />
                   ORDER NOW

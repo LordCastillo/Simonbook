@@ -1,4 +1,4 @@
-import { FadeIn } from '../animations/FadeIn';
+import { FadeIn } from "../animations/FadeIn";
 
 export function IntroSection() {
   return (
@@ -9,7 +9,7 @@ export function IntroSection() {
           <FadeIn className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
               <img
-                src="/images/author/4.jpeg"
+                src="/images/story/3.png"
                 alt="Simon Leviev - The Author"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -23,14 +23,15 @@ export function IntroSection() {
             </div>
             <div className="absolute -inset-4 border border-deep-gold/20 rounded-sm -z-10 transform translate-x-4 translate-y-4"></div>
           </FadeIn>
-          
+
           <FadeIn delay={0.2} className="space-y-8">
             <div className="space-y-2">
               <p className="font-body text-xs uppercase tracking-[0.3em] text-deep-gold">
                 The Journey
               </p>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-luxury-beige leading-tight">
-                From an Orthodox boy<br />
+                From an Orthodox boy
+                <br />
                 <span className="text-gradient-gold italic">
                   to the world's most wanted
                 </span>
