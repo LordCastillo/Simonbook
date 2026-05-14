@@ -9,7 +9,7 @@ export function IntroSection() {
           <FadeIn className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
               <img
-                src="/images/story/3.png"
+                src="/images/story/2.jpeg"
                 alt="Simon Leviev - The Author"
                 className="w-full h-full object-cover"
                 loading="lazy"

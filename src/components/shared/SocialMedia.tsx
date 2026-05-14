@@ -1,5 +1,5 @@
 import { FadeIn } from "../animations/FadeIn";
-import { FaInstagram, FaXTwitter, FaEnvelope } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter, FaEnvelope, FaTiktok } from "react-icons/fa6";
 
 const SocialMedia = () => {
   const socials = [
@@ -13,8 +13,14 @@ const SocialMedia = () => {
     {
       name: "Instagram",
       icon: FaInstagram,
-      href: "https://www.instagram.com/simonleviev8?igsh=dHJnMjhnOW5jOTIy",
+      href: "https://www.instagram.com/simonleviev1",
       label: "Follow on Instagram",
+    },
+    {
+      name: "TikTok",
+      icon: FaTiktok,
+      href: "https://www.tiktok.com/@simonleviev777",
+      label: "Follow on TikTok",
     },
     {
       name: "Email",
@@ -23,7 +29,6 @@ const SocialMedia = () => {
       label: "Email us",
     },
   ];
-
 
   return (
     <FadeIn delay={0.3} className="flex items-center gap-4">
@@ -44,4 +49,3 @@ const SocialMedia = () => {
 };
 
 export default SocialMedia;
-
