@@ -67,18 +67,19 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-[100svh] flex items-center px-5 sm:px-8 md:px-12 lg:px-[60px] pt-[96px] sm:pt-[108px] pb-10 sm:pb-16 relative overflow-hidden"
+      className="min-h-[100svh] relative overflow-hidden px-5 sm:px-8 md:px-12 lg:px-[60px] pt-[124px] sm:pt-[120px] pb-12 sm:pb-16 lg:flex lg:items-center"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center w-full max-w-7xl mx-auto z-[3]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 items-center w-full max-w-7xl mx-auto z-[3]">
 
-        {/* Book — shown first on mobile for visual impact */}
+        {/* Text first on mobile so book always fully visible when scrolling */}
+        {/* Book */}
         <FadeIn
           delay={0.1}
           className="order-1 lg:order-2 relative flex items-center justify-center [perspective:1200px] z-[3]"
         >
           <m.div
             style={canTiltBook ? { rotateY, rotateX, willChange: "transform" } : undefined}
-            className="relative w-[180px] h-[252px] xs:w-[210px] xs:h-[294px] sm:w-[260px] sm:h-[364px] md:w-[310px] md:h-[434px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-float-book"
+            className="relative w-[220px] h-[308px] xs:w-[240px] xs:h-[336px] sm:w-[280px] sm:h-[392px] md:w-[320px] md:h-[448px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-float-book"
           >
             <div className="absolute -inset-[20px] sm:-inset-[30px] rounded-full border border-gold/15 pointer-events-none animate-glow-pulse" />
             <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_10px_10px_4px] sm:rounded-[4px_12px_12px_4px] shadow-[0_20px_60px_rgba(0,0,0,0.7),0_0_60px_rgba(212,160,23,0.2)] sm:shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25)] border border-gold/20 overflow-hidden">
