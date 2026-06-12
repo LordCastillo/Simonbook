@@ -94,6 +94,7 @@ export function HeroSection() {
                   decoding="async"
                   width="380"
                   height="520"
+                  sizes="(max-width: 479px) 220px, (max-width: 639px) 240px, (max-width: 767px) 280px, (max-width: 1023px) 320px, 380px"
                 />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />

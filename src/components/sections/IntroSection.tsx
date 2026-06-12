@@ -13,6 +13,9 @@ export function IntroSection() {
                 alt="Simon Leviev - The Author"
                 className="w-full h-full object-cover"
                 loading="lazy"
+                decoding="async"
+                width="637"
+                height="849"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-luxury-black/20 to-transparent"></div>
               <div className="absolute bottom-8 left-8 right-8">
