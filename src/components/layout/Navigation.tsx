@@ -144,26 +144,24 @@ export function Navigation() {
               </Button>
             </div>
             <button
-              className="md:hidden text-luxury-beige"
+              className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-[5px] rounded-sm border border-gold/20 hover:border-gold/50 transition-colors duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d={
-                    mobileMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M4 6h16M4 12h16M4 18h16"
-                  }
-                />
-              </svg>
+              {mobileMenuOpen ? (
+                <>
+                  <span className="block w-5 h-[1.5px] bg-gold rotate-45 translate-y-[3.25px] transition-all duration-300" />
+                  <span className="block w-5 h-[1.5px] bg-gold -rotate-45 -translate-y-[3.25px] transition-all duration-300" />
+                </>
+              ) : (
+                <>
+                  <span className="block w-5 h-[1.5px] bg-beige-light transition-all duration-300" />
+                  <span className="block w-3.5 h-[1.5px] bg-gold transition-all duration-300" />
+                  <span className="block w-5 h-[1.5px] bg-beige-light transition-all duration-300" />
+                </>
+              )}
             </button>
           </div>
         </div>
