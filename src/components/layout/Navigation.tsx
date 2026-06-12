@@ -97,7 +97,7 @@ export function Navigation() {
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? "py-0" : "py-2"}`}
         id="navbar"
       >
-        <div className="glass-strong px-6 lg:px-12 py-4 sm:py-5">
+        <div className="glass-strong px-6 lg:px-12 py-2 sm:py-3">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <Logo handleScroll={handleScroll} />
             <div className="hidden md:flex items-center gap-8">

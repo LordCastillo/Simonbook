@@ -67,7 +67,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-[100svh] relative overflow-hidden px-5 sm:px-8 md:px-12 lg:px-[60px] pt-[124px] sm:pt-[120px] pb-12 sm:pb-16 lg:flex lg:items-center"
+      className="min-h-[100svh] relative overflow-hidden px-5 sm:px-8 md:px-12 lg:px-[60px] pt-[96px] sm:pt-[100px] pb-12 sm:pb-16 lg:flex lg:items-center"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 items-center w-full max-w-7xl mx-auto z-[3]">
 

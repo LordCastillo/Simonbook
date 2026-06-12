@@ -45,7 +45,7 @@ const Logo = ({
             ],
           }}
           transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-          className="relative h-[4.2rem] sm:h-[4.7rem] md:h-[5.2rem] w-auto object-contain z-10 transition-transform duration-700 group-hover:scale-110"
+          className="relative h-[3.2rem] sm:h-[3.6rem] md:h-[4rem] w-auto object-contain z-10 transition-transform duration-700 group-hover:scale-110"
           decoding="async"
           width="72"
           height="72"
