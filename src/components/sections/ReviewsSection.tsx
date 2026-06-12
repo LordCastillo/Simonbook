@@ -1,4 +1,3 @@
-import { m } from 'framer-motion';
 import { FadeIn } from '../animations/FadeIn';
 
 export function ReviewsSection() {
@@ -48,18 +47,7 @@ export function ReviewsSection() {
       </FadeIn>
 
       <div className="relative flex overflow-hidden group">
-        <m.div
-          animate={{
-            x: [0, "-50%"]
-          }}
-          transition={{
-            duration: 50,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="flex gap-6 whitespace-nowrap py-10"
-          style={{ width: "max-content" }}
-        >
+        <div className="flex w-max gap-6 whitespace-nowrap py-10 animate-marquee [animation-duration:50s] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
           {duplicatedReviews.map((review, i) => (
             <div 
               key={i} 
@@ -77,7 +65,7 @@ export function ReviewsSection() {
               </div>
             </div>
           ))}
-        </m.div>
+        </div>
         
         {/* Ambient Overlays for depth */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-[2] pointer-events-none" />

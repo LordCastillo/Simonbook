@@ -26,20 +26,34 @@ export function TrailerSection() {
             <div className="w-full h-full flex items-center justify-center relative">
               {/* Harmonious Blurred Background */}
               <div className="absolute inset-0 z-0">
-                <img
-                  src="/images/info-book.jpg"
-                  alt=""
-                  className="w-full h-full object-cover blur-3xl opacity-40 scale-110 transition-transform duration-700 group-hover:scale-125"
-                />
+                <picture className="block w-full h-full">
+                  <source srcSet="/images/info-book.webp" type="image/webp" />
+                  <img
+                    src="/images/info-book.jpg"
+                    alt=""
+                    className="w-full h-full object-cover blur-3xl opacity-40 scale-110 transition-transform duration-700 group-hover:scale-125"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1146"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-luxury-black/40"></div>
               </div>
 
               {/* Main Poster Image - Set to object-contain for full visibility */}
-              <img
-                src="/images/info-book.jpg"
-                alt="Trailer Cover"
-                className="relative z-10 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-              />
+              <picture className="relative z-10 block w-full h-full">
+                <source srcSet="/images/info-book.webp" type="image/webp" />
+                <img
+                  src="/images/info-book.jpg"
+                  alt="Trailer Cover"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  width="1600"
+                  height="1146"
+                />
+              </picture>
 
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-luxury-black/20 transition-opacity duration-300 group-hover:bg-transparent"></div>

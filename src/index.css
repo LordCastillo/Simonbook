@@ -3,7 +3,8 @@
 
 @layer base {
   html {
-    scroll-behavior: initial; /* Handled by Lenis */
+    scroll-behavior: auto; /* Handled by Lenis when motion is allowed */
+    scroll-padding-top: 96px;
     scrollbar-width: thin;
     scrollbar-color: #a0780f #020202;
   }
@@ -24,7 +25,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: default;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+  }
+
+  img,
+  picture,
+  canvas {
+    display: block;
   }
 }
 
@@ -44,6 +51,33 @@ html.lenis body {
 }
 .lenis.lenis-smooth iframe {
   pointer-events: none;
+}
+
+@supports (content-visibility: auto) {
+  main > section:not(#hero),
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
+
+@media (max-width: 767px) {
+  .glass,
+  .glass-strong {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Custom Styles from main-kimi.html */
@@ -194,4 +228,3 @@ html.lenis body {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-

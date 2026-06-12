@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { m } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
 interface FadeInProps {
@@ -11,6 +11,7 @@ interface FadeInProps {
 }
 
 export function FadeIn({ children, delay = 0, className, direction = 'up', duration = 0.9 }: FadeInProps) {
+  const shouldReduceMotion = useReducedMotion();
   const directions = {
     up: { y: 40, x: 0 },
     down: { y: -40, x: 0 },
@@ -18,6 +19,10 @@ export function FadeIn({ children, delay = 0, className, direction = 'up', durat
     right: { x: -40, y: 0 },
     none: { x: 0, y: 0 }
   };
+
+  if (shouldReduceMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   return (
     <m.div

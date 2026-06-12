@@ -1,40 +1,70 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FadeIn } from "../animations/FadeIn";
 import { Button } from "../ui/Button";
 import { BookOpen, Play, Globe, Film, Heart, Plane } from "lucide-react";
 
 export function HeroSection() {
-  const [windowSize, setWindowSize] = useState({ 
-    width: typeof window !== "undefined" ? window.innerWidth : 0, 
-    height: typeof window !== "undefined" ? window.innerHeight : 0 
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 1,
+    height: typeof window !== "undefined" ? window.innerHeight : 1,
   });
+  const [canTiltBook, setCanTiltBook] = useState(false);
+  const canTiltBookRef = useRef(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   useEffect(() => {
-    const handleResize = () => {
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    const updateViewport = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      const shouldTilt = window.innerWidth >= 1024 && !reducedMotionQuery.matches;
+      canTiltBookRef.current = shouldTilt;
+      setCanTiltBook(shouldTilt);
+
+      if (!shouldTilt) {
+        mouseX.set(window.innerWidth / 2);
+        mouseY.set(window.innerHeight / 2);
+      }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!canTiltBookRef.current) return;
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    updateViewport();
+
+    window.addEventListener("resize", updateViewport);
+    window.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
+    reducedMotionQuery.addEventListener("change", updateViewport);
+
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", updateViewport);
+      window.removeEventListener("pointermove", handlePointerMove);
+      reducedMotionQuery.removeEventListener("change", updateViewport);
     };
   }, [mouseX, mouseY]);
 
   const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
-  const rotateY = useTransform(smoothMouseX, [0, windowSize.width], [2, -18]);
-  const rotateX = useTransform(smoothMouseY, [0, windowSize.height], [10, -5]);
+  const rotateY = useTransform(
+    smoothMouseX,
+    [0, Math.max(windowSize.width, 1)],
+    [2, -18],
+  );
+  const rotateX = useTransform(
+    smoothMouseY,
+    [0, Math.max(windowSize.height, 1)],
+    [10, -5],
+  );
 
   return (
     <section
@@ -100,19 +130,28 @@ export function HeroSection() {
           className="order-1 lg:order-2 relative flex items-center justify-center [perspective:1200px] z-[3]"
         >
           <m.div
-            style={{ rotateY, rotateX }}
+            style={
+              canTiltBook
+                ? { rotateY, rotateX, willChange: "transform" }
+                : undefined
+            }
             className="relative w-[220px] h-[310px] sm:w-[280px] sm:h-[390px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-[floatBook_6s_ease-in-out_infinite]"
           >
             <div className="absolute -inset-[30px] rounded-full border border-gold/15 pointer-events-none animate-[glowPulse_3s_ease-in-out_infinite]" />
             <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_12px_12px_4px] shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25),0_0_200px_rgba(255,122,0,0.1)] border border-gold/20 overflow-hidden">
-              <img
-                src="/images/book.JPG"
-                alt="The Story Behind The Man - Simon Leviev Official Autobiography"
-                className="w-full h-full object-cover"
-                fetchPriority="high"
-                width="380"
-                height="520"
-              />
+              <picture className="block w-full h-full">
+                <source srcSet="/images/book.webp" type="image/webp" />
+                <img
+                  src="/images/book.JPG"
+                  alt="The Story Behind The Man - Simon Leviev Official Autobiography"
+                  className="w-full h-full object-cover"
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
+                  width="380"
+                  height="520"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
               <div className="absolute left-0 top-0 w-[18px] h-full bg-gradient-to-r from-black/40 via-transparent to-black/20 z-[2]" />
             </div>

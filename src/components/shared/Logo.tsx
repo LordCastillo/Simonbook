@@ -56,6 +56,9 @@ const Logo = ({
             src="/logo.png"
             alt="Simon Leviev"
             className="w-full h-full object-contain filter drop-shadow-md transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[5deg]"
+            decoding="async"
+            width="64"
+            height="64"
           />
         </div>
       </div>
@@ -78,4 +81,3 @@ const Logo = ({
 };
 
 export default Logo;
-

@@ -1,18 +1,28 @@
 import { useRef, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { m, useMotionValue, useSpring } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type BaseButtonProps = {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
-  href?: string;
-  target?: string;
-  rel?: string;
-}
+};
 
-export function Button({ children, variant = 'primary', className, href, onClick, ...props }: ButtonProps) {
+type AnchorButtonProps = BaseButtonProps &
+  Omit<HTMLMotionProps<'a'>, 'children' | 'className' | 'style'> & {
+    href: string;
+  };
+
+type NativeButtonProps = BaseButtonProps &
+  Omit<HTMLMotionProps<'button'>, 'children' | 'className' | 'style'> & {
+    href?: undefined;
+  };
+
+type ButtonProps = AnchorButtonProps | NativeButtonProps;
+
+export function Button({ children, variant = 'primary', className, ...props }: ButtonProps) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const x = useMotionValue(0);
@@ -27,13 +37,13 @@ export function Button({ children, variant = 'primary', className, href, onClick
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+  const handleMagneticMove = (clientX: number, clientY: number) => {
     if (!ref.current || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.15);
-    y.set((e.clientY - centerY) * 0.15);
+    x.set((clientX - centerX) * 0.15);
+    y.set((clientY - centerY) * 0.15);
   };
 
   const handleMouseLeave = () => {
@@ -42,7 +52,7 @@ export function Button({ children, variant = 'primary', className, href, onClick
     y.set(0);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+  const handleHashScroll = (e: React.MouseEvent, href?: string) => {
     if (href?.startsWith('#')) {
       e.preventDefault();
       const element = document.querySelector(href);
@@ -55,12 +65,11 @@ export function Button({ children, variant = 'primary', className, href, onClick
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'auto'
+            : 'smooth'
         });
       }
-    }
-    if (onClick) {
-      (onClick as React.MouseEventHandler)(e);
     }
   };
 
@@ -70,27 +79,73 @@ export function Button({ children, variant = 'primary', className, href, onClick
   
   const secondaryStyles = "bg-transparent text-beige border-[1.5px] border-gold/50 hover:border-gold hover:bg-gold/10 hover:shadow-[0_0_40px_rgba(212,160,23,0.2)] hover:-translate-y-[3px] backdrop-blur-md font-semibold";
 
-  const Component = href ? m.a : m.button;
+  const sharedClassName = cn(
+    baseStyles,
+    variant === 'primary' ? primaryStyles : secondaryStyles,
+    className
+  );
+  const motionStyle = {
+    x: !isMobile ? mouseXSpring : 0,
+    y: !isMobile ? mouseYSpring : 0,
+  };
+
+  if ('href' in props && props.href !== undefined) {
+    const { href, onClick, ...anchorProps } = props;
+
+    const setAnchorRef = (node: HTMLAnchorElement | null) => {
+      ref.current = node;
+    };
+
+    const handleAnchorClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+      handleHashScroll(e, href);
+      onClick?.(e);
+    };
+
+    const handleAnchorMouseMove: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+      handleMagneticMove(e.clientX, e.clientY);
+    };
+
+    return (
+      <m.a
+        ref={setAnchorRef}
+        href={href}
+        onClick={handleAnchorClick}
+        onMouseMove={handleAnchorMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={motionStyle}
+        className={sharedClassName}
+        {...anchorProps}
+      >
+        {children}
+      </m.a>
+    );
+  }
+
+  const { onClick, ...buttonProps } = props;
+
+  const setButtonRef = (node: HTMLButtonElement | null) => {
+    ref.current = node;
+  };
+
+  const handleButtonClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    onClick?.(e);
+  };
+
+  const handleButtonMouseMove: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    handleMagneticMove(e.clientX, e.clientY);
+  };
 
   return (
-    // @ts-expect-error - Framer motion type complexity with generic Component
-    <Component
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={ref as any}
-      href={href}
-      onClick={handleClick as any}
-      onMouseMove={handleMouseMove as any}
-      onMouseLeave={handleMouseLeave as any}
-      style={{ x: !isMobile ? mouseXSpring : 0, y: !isMobile ? mouseYSpring : 0 }}
-      className={cn(
-        baseStyles,
-        variant === 'primary' ? primaryStyles : secondaryStyles,
-        className
-      )}
-      {...props}
+    <m.button
+      ref={setButtonRef}
+      onClick={handleButtonClick}
+      onMouseMove={handleButtonMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={motionStyle}
+      className={sharedClassName}
+      {...buttonProps}
     >
       {children}
-    </Component>
+    </m.button>
   );
 }
-

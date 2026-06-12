@@ -19,7 +19,12 @@ export function Footer() {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches
+        ? "auto"
+        : "smooth";
+
+      element.scrollIntoView({ behavior, block: "start" });
     }
   };
 

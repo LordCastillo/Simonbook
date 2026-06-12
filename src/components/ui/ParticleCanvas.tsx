@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 class Particle {
   x: number = 0;
@@ -61,41 +61,90 @@ export function ParticleCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (prefersReducedMotion.matches) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let resizeFrameId = 0;
+    let lastFrameTime = 0;
+    let isRunning = true;
     const particles: Particle[] = [];
-    
-    // Optimize for mobile
-    const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 20 : 60;
+
+    const getParticleCount = () => {
+      if (window.innerWidth < 768) return 12;
+      if (window.innerWidth < 1280) return 28;
+      return 42;
+    };
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    const scheduleResize = () => {
+      cancelAnimationFrame(resizeFrameId);
+      resizeFrameId = requestAnimationFrame(resizeCanvas);
+    };
 
-    for (let i = 0; i < particleCount; i++) {
+    resizeCanvas();
+    window.addEventListener("resize", scheduleResize);
+
+    for (let i = 0; i < getParticleCount(); i++) {
       particles.push(new Particle(canvas));
     }
 
-    const animate = () => {
+    const drawFrame = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => {
         p.update();
         p.draw(ctx);
       });
+    };
+
+    const animate = (time: number) => {
+      if (!isRunning) return;
+
+      if (time - lastFrameTime > 33) {
+        drawFrame();
+        lastFrameTime = time;
+      }
+
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    const start = () => {
+      if (isRunning) return;
+      isRunning = true;
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const stop = () => {
+      isRunning = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      stop();
+      cancelAnimationFrame(resizeFrameId);
+      window.removeEventListener("resize", scheduleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -103,6 +152,7 @@ export function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-[1] w-full h-full"
     />
   );

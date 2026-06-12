@@ -47,11 +47,18 @@ export function FeaturesSection() {
 
               <div className="w-28 h-36 mb-8 relative transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
                 <div className="absolute inset-0 bg-gold/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm"></div>
-                <img 
-                  src={option.image} 
-                  alt={option.title}
-                  className="w-full h-full object-cover rounded-sm shadow-2xl relative z-10 border border-gold/20"
-                />
+                <picture className="relative z-10 block w-full h-full">
+                  <source srcSet="/images/book.webp" type="image/webp" />
+                  <img
+                    src={option.image}
+                    alt={option.title}
+                    className="w-full h-full object-cover rounded-sm shadow-2xl border border-gold/20"
+                    loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="1801"
+                  />
+                </picture>
               </div>
               
               <h3 className="font-display text-[1.8rem] font-bold text-beige-light mb-3 tracking-[1px]">

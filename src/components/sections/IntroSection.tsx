@@ -8,12 +8,18 @@ export function IntroSection() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <FadeIn className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-              <img
-                src="/images/story/2.jpeg"
-                alt="Simon Leviev - The Author"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              <picture className="block w-full h-full">
+                <source srcSet="/images/story/2.webp" type="image/webp" />
+                <img
+                  src="/images/story/2.jpeg"
+                  alt="Simon Leviev - The Author"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width="1200"
+                  height="900"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-luxury-black/20 to-transparent"></div>
               <div className="absolute bottom-8 left-8 right-8">
                 <p className="font-signature text-4xl text-deep-gold drop-shadow-lg">

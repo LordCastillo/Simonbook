@@ -17,15 +17,19 @@ export function Navigation() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 50);
+    const isScrolled = latest > 50;
+    setScrolled((current) => (current === isScrolled ? current : isScrolled));
   });
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    if (!mobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [mobileMenuOpen]);
 
   useEffect(() => {
@@ -46,7 +50,9 @@ export function Navigation() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          setActiveSection((current) =>
+            current === entry.target.id ? current : entry.target.id,
+          );
         }
       });
     };
@@ -76,7 +82,12 @@ export function Navigation() {
 
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches
+        ? "auto"
+        : "smooth";
+
+      target.scrollIntoView({ behavior, block: "start" });
     }
   };
 

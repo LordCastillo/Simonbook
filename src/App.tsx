@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, MotionConfig, domAnimation } from "framer-motion";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
 import { AmbientGlow } from "./components/ui/AmbientGlow";
 import { ParticleCanvas } from "./components/ui/ParticleCanvas";
@@ -58,29 +58,31 @@ function App() {
   useSmoothScroll();
 
   return (
-    <LazyMotion features={domAnimation}>
-      <AmbientGlow />
-      <ParticleCanvas />
+    <MotionConfig reducedMotion="user">
+      <LazyMotion features={domAnimation}>
+        <AmbientGlow />
+        <ParticleCanvas />
 
-      <Navigation />
+        <Navigation />
 
-      <main className="relative z-[2]">
-        <HeroSection />
-        <Suspense fallback={null}>
-          <IntroSection />
-          <TimelineSection />
-          <DoubleLifeSection />
-          <AuthorSection />
-          <TrailerSection />
-          <LifeSection />
-          <ReviewsSection />
-          <FeaturesSection />
-          <FinalCtaSection />
-        </Suspense>
-      </main>
+        <main className="relative z-[2]">
+          <HeroSection />
+          <Suspense fallback={null}>
+            <IntroSection />
+            <TimelineSection />
+            <DoubleLifeSection />
+            <AuthorSection />
+            <TrailerSection />
+            <LifeSection />
+            <ReviewsSection />
+            <FeaturesSection />
+            <FinalCtaSection />
+          </Suspense>
+        </main>
 
-      <Footer />
-    </LazyMotion>
+        <Footer />
+      </LazyMotion>
+    </MotionConfig>
   );
 }
 

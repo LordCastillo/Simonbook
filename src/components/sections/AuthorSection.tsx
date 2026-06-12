@@ -7,11 +7,18 @@ export function AuthorSection() {
           <div className="lg:col-span-2 reveal">
             <div className="relative">
               <div className="aspect-3/4 overflow-hidden rounded-sm relative">
-                <img
-                  src="/images/book.JPG"
-                  alt="Simon Leviev"
-                  className="w-full h-full object-cover object-top"
-                />
+                <picture className="block w-full h-full">
+                  <source srcSet="/images/book.webp" type="image/webp" />
+                  <img
+                    src="/images/book.JPG"
+                    alt="Simon Leviev"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="1801"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-luxury-black/20 to-transparent"></div>
               </div>
               <div className="absolute -inset-3 border border-deep-gold/20 rounded-sm pointer-events-none"></div>
@@ -88,4 +95,3 @@ export function AuthorSection() {
     </section>
   );
 }
-
