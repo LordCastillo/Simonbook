@@ -4,11 +4,10 @@ export function AmbientGlow() {
   const primaryGlowRef = useRef<HTMLDivElement>(null);
   const secondaryGlowRef = useRef<HTMLDivElement>(null);
   const [isStatic, setIsStatic] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let canAnimate = false;
     let frameId = 0;
 
@@ -18,7 +17,9 @@ export function AmbientGlow() {
     };
 
     const updateMode = () => {
-      canAnimate = window.innerWidth >= 768 && !reducedMotionQuery.matches;
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      canAnimate = !mobile && !reducedMotionQuery.matches;
       setIsStatic(!canAnimate);
 
       if (!canAnimate) {
@@ -38,7 +39,6 @@ export function AmbientGlow() {
         if (primaryGlowRef.current) {
           primaryGlowRef.current.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
         }
-
         if (secondaryGlowRef.current) {
           secondaryGlowRef.current.style.transform = `translate(${-x * 30}px, ${-y * 30}px)`;
         }
@@ -47,9 +47,7 @@ export function AmbientGlow() {
 
     updateMode();
 
-    window.addEventListener("pointermove", handlePointerMove, {
-      passive: true,
-    });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("resize", updateMode);
     reducedMotionQuery.addEventListener("change", updateMode);
 
@@ -61,19 +59,29 @@ export function AmbientGlow() {
     };
   }, []);
 
+  /* Mobile: smaller, less-blurred static orbs to avoid GPU overdraw */
+  const blurClass = isMobile
+    ? "blur-[60px]"
+    : isStatic
+    ? "blur-[100px]"
+    : "blur-[180px]";
+
+  const primarySize  = isMobile ? "w-[400px] h-[400px]" : "w-[800px] h-[800px]";
+  const secondarySize = isMobile ? "w-[280px] h-[280px]" : "w-[600px] h-[600px]";
+
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <div
         ref={primaryGlowRef}
-        className={`absolute rounded-full transition-transform duration-[1500ms] ease-out opacity-[0.12] w-[800px] h-[800px] bg-orange-glow -top-[300px] -left-[200px] will-change-transform ${isStatic ? "blur-[100px]" : "blur-[180px]"}`}
+        className={`absolute rounded-full transition-transform duration-[1500ms] ease-out opacity-[0.10] ${primarySize} bg-orange-glow -top-[200px] -left-[150px] will-change-transform ${blurClass}`}
       />
       <div
         ref={secondaryGlowRef}
-        className={`absolute rounded-full transition-transform duration-[1500ms] ease-out opacity-[0.08] w-[600px] h-[600px] bg-gold -bottom-[200px] -right-[200px] will-change-transform ${isStatic ? "blur-[100px]" : "blur-[180px]"}`}
+        className={`absolute rounded-full transition-transform duration-[1500ms] ease-out opacity-[0.07] ${secondarySize} bg-gold -bottom-[150px] -right-[150px] will-change-transform ${blurClass}`}
       />
-      {!isStatic && (
+      {!isStatic && !isMobile && (
         <div
-          className="absolute rounded-full blur-[180px] transition-transform duration-[1500ms] ease-out opacity-[0.06] w-[500px] h-[500px] bg-orange-warm top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2"
+          className="absolute rounded-full blur-[180px] transition-transform duration-[1500ms] ease-out opacity-[0.05] w-[500px] h-[500px] bg-orange-warm top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2"
         />
       )}
     </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FadeIn } from "../animations/FadeIn";
 import { Button } from "../ui/Button";
-import { BookOpen, Play, Globe, Film, Heart, Plane } from "lucide-react";
+import { BookOpen, Play, Globe, Film, Heart } from "lucide-react";
 
 export function HeroSection() {
   const [windowSize, setWindowSize] = useState({
@@ -40,9 +40,7 @@ export function HeroSection() {
     updateViewport();
 
     window.addEventListener("resize", updateViewport);
-    window.addEventListener("pointermove", handlePointerMove, {
-      passive: true,
-    });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
     reducedMotionQuery.addEventListener("change", updateViewport);
 
     return () => {
@@ -52,8 +50,8 @@ export function HeroSection() {
     };
   }, [mouseX, mouseY]);
 
-  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, { stiffness: 60, damping: 22 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 60, damping: 22 });
 
   const rotateY = useTransform(
     smoothMouseX,
@@ -69,76 +67,21 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center px-8 md:px-[60px] pt-[120px] pb-[80px] relative overflow-hidden"
+      className="min-h-[100svh] flex items-center px-5 sm:px-8 md:px-12 lg:px-[60px] pt-[96px] sm:pt-[108px] pb-10 sm:pb-16 relative overflow-hidden"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full container mx-auto z-[3]">
-        {/* Left Content */}
-        <div className="order-2 lg:order-1 text-center lg:text-left">
-          <FadeIn>
-            <p className="font-ui text-[0.7rem] font-semibold tracking-[5px] uppercase text-gold mb-5 opacity-90">
-              The Official Autobiography
-            </p>
-            <h1 className="font-display text-[2.4rem] sm:text-[3rem] lg:text-[clamp(3rem,5.5vw,5.5rem)] font-black leading-[1.05] text-beige-light mb-3 tracking-[-1px]">
-              THE STORY
-              <br />
-              BEHIND
-              <br />
-              <span className="block text-gold italic font-bold">THE MAN</span>
-            </h1>
-            <p className="font-body text-[1.1rem] sm:text-[1.35rem] italic text-beige-dark mb-7 font-normal tracking-[1px]">
-              By Simon Leviev
-            </p>
-            <p className="font-body text-[1.05rem] sm:text-[1.15rem] text-beige/70 mb-9 max-w-[520px] mx-auto lg:mx-0 leading-[1.8]">
-              You’ve heard the headlines. You’ve seen the documentaries. Now
-              hear the story from the man himself. Behind the luxury cars and
-              jets lies a truth far more shocking than anyone imagined.
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center w-full max-w-7xl mx-auto z-[3]">
 
-            <div className="flex flex-wrap gap-4.5 justify-center lg:justify-start mb-9">
-              <Button href="#order" variant="primary">
-                <BookOpen className="w-[18px] h-[18px]" /> Buy The Book
-              </Button>
-              <Button href="#trailer" variant="secondary">
-                <Play className="w-[18px] h-[18px] transition-transform duration-300 group-hover:scale-120" />{" "}
-                Watch Trailer
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
-              {[
-                { icon: Globe, text: "Worldwide Bestseller" },
-                { icon: Film, text: "Based on True Events" },
-                { icon: Heart, text: "Millions Inspired" },
-              ].map((badge, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 font-ui text-[0.7rem] font-medium tracking-[1.5px] uppercase text-beige/60"
-                >
-                  <span className="w-8 h-8 rounded-full border border-gold-dark flex items-center justify-center text-gold bg-gold/10 shrink-0">
-                    <badge.icon className="w-3.5 h-3.5" />
-                  </span>
-                  {badge.text}
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-
-        {/* Right Content - 3D Book */}
+        {/* Book — shown first on mobile for visual impact */}
         <FadeIn
-          delay={0.2}
+          delay={0.1}
           className="order-1 lg:order-2 relative flex items-center justify-center [perspective:1200px] z-[3]"
         >
           <m.div
-            style={
-              canTiltBook
-                ? { rotateY, rotateX, willChange: "transform" }
-                : undefined
-            }
-            className="relative w-[220px] h-[310px] sm:w-[280px] sm:h-[390px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-[floatBook_6s_ease-in-out_infinite]"
+            style={canTiltBook ? { rotateY, rotateX, willChange: "transform" } : undefined}
+            className="relative w-[180px] h-[252px] xs:w-[210px] xs:h-[294px] sm:w-[260px] sm:h-[364px] md:w-[310px] md:h-[434px] lg:w-[380px] lg:h-[520px] [transform-style:preserve-3d] animate-float-book"
           >
-            <div className="absolute -inset-[30px] rounded-full border border-gold/15 pointer-events-none animate-[glowPulse_3s_ease-in-out_infinite]" />
-            <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_12px_12px_4px] shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25),0_0_200px_rgba(255,122,0,0.1)] border border-gold/20 overflow-hidden">
+            <div className="absolute -inset-[20px] sm:-inset-[30px] rounded-full border border-gold/15 pointer-events-none animate-glow-pulse" />
+            <div className="w-full h-full relative [transform-style:preserve-3d] rounded-[4px_10px_10px_4px] sm:rounded-[4px_12px_12px_4px] shadow-[0_20px_60px_rgba(0,0,0,0.7),0_0_60px_rgba(212,160,23,0.2)] sm:shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_80px_rgba(212,160,23,0.25)] border border-gold/20 overflow-hidden">
               <picture className="block w-full h-full">
                 <source srcSet="/images/book.webp" type="image/webp" />
                 <img
@@ -153,13 +96,65 @@ export function HeroSection() {
                 />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
-              <div className="absolute left-0 top-0 w-[18px] h-full bg-gradient-to-r from-black/40 via-transparent to-black/20 z-[2]" />
+              <div className="absolute left-0 top-0 w-[14px] sm:w-[18px] h-full bg-gradient-to-r from-black/40 via-transparent to-black/20 z-[2]" />
             </div>
           </m.div>
-          <div className="absolute bottom-[10%] -right-[5%] text-[6rem] lg:text-[8rem] text-white/5 pointer-events-none z-0 -rotate-12">
-            <Plane className="w-full h-full" />
-          </div>
         </FadeIn>
+
+        {/* Text content */}
+        <div className="order-2 lg:order-1 text-center lg:text-left">
+          <FadeIn delay={0.15}>
+            <p className="font-ui text-[0.62rem] sm:text-[0.7rem] font-semibold tracking-[4px] sm:tracking-[5px] uppercase text-gold mb-3 sm:mb-5 opacity-90">
+              The Official Autobiography
+            </p>
+
+            <h1 className="font-display text-[2.1rem] xs:text-[2.5rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[clamp(3rem,5.5vw,5.5rem)] font-black leading-[1.05] text-beige-light mb-2 sm:mb-3 tracking-[-1px]">
+              THE STORY
+              <br />
+              BEHIND
+              <br />
+              <span className="block text-gold italic font-bold">THE MAN</span>
+            </h1>
+
+            <p className="font-body text-[1rem] sm:text-[1.1rem] md:text-[1.35rem] italic text-beige-dark mb-4 sm:mb-7 font-normal tracking-[1px]">
+              By Simon Leviev
+            </p>
+
+            <p className="font-body text-[0.9rem] sm:text-[1rem] md:text-[1.1rem] text-beige/70 mb-6 sm:mb-9 max-w-[480px] sm:max-w-[520px] mx-auto lg:mx-0 leading-[1.75] sm:leading-[1.8]">
+              You've heard the headlines. You've seen the documentaries. Now
+              hear the story from the man himself. Behind the luxury cars and
+              jets lies a truth far more shocking than anyone imagined.
+            </p>
+
+            <div className="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-9">
+              <Button href="#order" variant="primary" className="w-full xs:w-auto justify-center">
+                <BookOpen className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px]" /> Buy The Book
+              </Button>
+              <Button href="#trailer" variant="secondary" className="w-full xs:w-auto justify-center">
+                <Play className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] transition-transform duration-300 group-hover:scale-120" /> Watch Trailer
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start">
+              {[
+                { icon: Globe, text: "Worldwide Bestseller" },
+                { icon: Film, text: "Based on True Events" },
+                { icon: Heart, text: "Millions Inspired" },
+              ].map((badge, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-1.5 sm:gap-2 font-ui text-[0.62rem] sm:text-[0.7rem] font-medium tracking-[1.5px] uppercase text-beige/60"
+                >
+                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gold-dark flex items-center justify-center text-gold bg-gold/10 shrink-0">
+                    <badge.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </span>
+                  {badge.text}
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+
       </div>
     </section>
   );

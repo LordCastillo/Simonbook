@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '380px',
+      },
       colors: {
         'luxury-black': '#050505',
         'deep-gold': '#d4a017',

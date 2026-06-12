@@ -13,67 +13,52 @@ const Logo = ({
       href="#hero"
       onClick={onLogoClick}
       aria-label="Simon Leviev"
-      className="relative flex items-center group cursor-pointer"
+      className="relative flex items-center gap-0 group cursor-pointer select-none"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      {/* The "S" Logo Icon */}
-      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 z-20">
-        {/* Continuous Pulsing Aura */}
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.5, 0.2]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute inset-0 rounded-full bg-deep-gold blur-md"
-        />
-        
-        {/* Periodic Gold Ping */}
-        <motion.div 
-          animate={{ 
-            scale: [1, 2],
-            opacity: [0.5, 0]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeOut",
-            delay: 1
-          }}
-          className="absolute inset-0 rounded-full border border-gold/40"
+      {/* SL monogram — large, no container, effects only */}
+      <div className="relative shrink-0 flex items-center justify-center translate-y-2 translate-x-1">
+
+        {/* Breathing gold aura — lighter */}
+        <motion.div
+          animate={{ scale: [1, 1.4, 1], opacity: [0.07, 0.18, 0.07] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-[-4px] rounded-full bg-deep-gold blur-[10px] pointer-events-none"
         />
 
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-deep-gold/40 to-transparent blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-        <div className="relative w-full h-full overflow-hidden rounded-full border border-gold/30 bg-black/60 backdrop-blur-md flex items-center justify-center p-1.5 transition-all duration-500 group-hover:border-gold/60 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]">
-          <img
-            src="/logo.png"
-            alt="Simon Leviev"
-            className="w-full h-full object-contain filter drop-shadow-md transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[5deg]"
-            decoding="async"
-            width="64"
-            height="64"
-          />
-        </div>
+        {/* Expanding ring burst — lighter */}
+        <motion.div
+          animate={{ scale: [0.8, 1.9], opacity: [0.12, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 1.4 }}
+          className="absolute inset-0 rounded-full bg-deep-gold/10 blur-[7px] pointer-events-none"
+        />
+
+        <motion.img
+          src="/logo.png"
+          alt="SL"
+          animate={{
+            filter: [
+              "drop-shadow(0 0 3px rgba(212,160,23,0.2))",
+              "drop-shadow(0 0 7px rgba(212,160,23,0.45))",
+              "drop-shadow(0 0 3px rgba(212,160,23,0.2))",
+            ],
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          className="relative h-[4.2rem] sm:h-[4.7rem] md:h-[5.2rem] w-auto object-contain z-10 transition-transform duration-700 group-hover:scale-110"
+          decoding="async"
+          width="72"
+          height="72"
+        />
       </div>
 
-
-      {/* Brand Text - "IMON LEVIEV" (Logo acts as the S) */}
-      <div className="hidden sm:block relative overflow-hidden ml-[-16px] md:ml-[-20px] pl-[24px] md:pl-[28px] pr-3 sm:pr-4 py-1.5 sm:py-2 bg-black/20 backdrop-blur-sm rounded-r-full border-y border-r border-gold/10 transition-all duration-500 group-hover:border-gold/30 group-hover:bg-black/40">
-        <span className="font-elegant text-base sm:text-lg md:text-xl text-gradient-gold tracking-[0.16em] sm:tracking-[0.24em] opacity-90 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap">
+      {/* IMON LEVIEV — small, tight, completes the SIMON LEVIEV name */}
+      <div className="flex flex-col justify-center -ml-2 sm:-ml-2.5 md:-ml-3 translate-y-2">
+        <span className="font-elegant italic leading-none tracking-[0.08em] text-gradient-gold opacity-90 group-hover:opacity-100 transition-opacity duration-500 whitespace-nowrap text-[1.35rem] sm:text-[1.5rem] md:text-[1.65rem]">
           IMON LEVIEV
         </span>
-        
-        {/* Prestige Shimmer Effect */}
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none"></div>
+        <span className="block h-[1px] w-0 group-hover:w-full bg-gradient-to-r from-gold/60 via-deep-gold to-transparent transition-all duration-500 ease-out mt-[2px]" />
       </div>
-
-      {/* Decorative dot */}
-      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-deep-gold opacity-0 group-hover:opacity-100 blur-[1px] transition-all duration-500"></div>
     </motion.a>
   );
 };

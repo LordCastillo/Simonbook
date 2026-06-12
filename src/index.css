@@ -238,3 +238,28 @@ html.lenis body {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+
+@keyframes floatBook {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-10px) rotate(0.4deg); }
+  66%       { transform: translateY(-5px) rotate(-0.3deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.28; transform: scale(1.06); }
+}
+
+/* Performance: force GPU layers on animated elements */
+.animate-float-book { animation: floatBook 6s ease-in-out infinite; will-change: transform; }
+.animate-glow-pulse  { animation: glowPulse 3s ease-in-out infinite; }
+
+/* Reduce expensive backdrop-blur on low-end / small screens */
+@media (max-width: 639px) {
+  .backdrop-blur-md  { backdrop-filter: blur(8px);  -webkit-backdrop-filter: blur(8px); }
+  .backdrop-blur-sm  { backdrop-filter: blur(4px);  -webkit-backdrop-filter: blur(4px); }
+  .backdrop-blur-xl  { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+}
+
+/* Containment hints for fixed/layered UI */
+.fixed { contain: layout style; }
