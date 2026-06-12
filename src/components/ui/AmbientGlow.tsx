@@ -3,8 +3,12 @@ import { useEffect, useRef, useState } from "react";
 export function AmbientGlow() {
   const primaryGlowRef = useRef<HTMLDivElement>(null);
   const secondaryGlowRef = useRef<HTMLDivElement>(null);
-  const [isStatic, setIsStatic] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+  const [isStatic, setIsStatic] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : true
+  );
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");

@@ -34,17 +34,9 @@ const Logo = ({
           className="absolute inset-0 rounded-full bg-deep-gold/10 blur-[7px] pointer-events-none"
         />
 
-        <motion.img
+        <img
           src="/logo.png"
           alt="SL"
-          animate={{
-            filter: [
-              "drop-shadow(0 0 3px rgba(212,160,23,0.2))",
-              "drop-shadow(0 0 7px rgba(212,160,23,0.45))",
-              "drop-shadow(0 0 3px rgba(212,160,23,0.2))",
-            ],
-          }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
           className="relative h-[3.2rem] sm:h-[3.6rem] md:h-[4rem] w-auto object-contain z-10 transition-transform duration-700 group-hover:scale-110"
           decoding="async"
           width="72"
