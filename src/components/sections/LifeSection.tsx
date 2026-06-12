@@ -1,6 +1,10 @@
+import { useRef } from "react";
 import { FadeIn } from "../animations/FadeIn";
+import { useMarqueePlayback } from "../../hooks/useMarqueePlayback";
 
 export function LifeSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
   const images = [
     "/images/author/1.jpeg",
     "/images/author/2.jpeg",
@@ -17,8 +21,11 @@ export function LifeSection() {
   // Duplicate the array to create a seamless infinite loop
   const duplicatedImages = [...images, ...images];
 
+  useMarqueePlayback(sectionRef, marqueeRef);
+
   return (
     <section
+      ref={sectionRef}
       id="life"
       className="py-[80px] lg:py-[100px] relative overflow-hidden"
     >
@@ -38,10 +45,13 @@ export function LifeSection() {
         <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-luxury-black to-transparent z-10 pointer-events-none"></div>
 
         {/* Animated track */}
-        <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+        <div
+          ref={marqueeRef}
+          className="marquee-track flex w-max animate-marquee [animation-duration:64s] motion-reduce:animate-none"
+        >
           {duplicatedImages.map((src, i) => (
             <div key={i} className="flex-shrink-0 w-[300px] md:w-[400px] px-3">
-              <div className="relative group rounded-[4px] overflow-hidden aspect-[4/3] border border-glass-border shadow-[0_20px_60px_rgba(0,0,0,0.5)] cursor-pointer">
+              <div className="relative group rounded-[4px] overflow-hidden aspect-[4/3] border border-glass-border shadow-[0_16px_36px_rgba(0,0,0,0.45)] cursor-pointer [contain:layout_paint]">
                 <img
                   src={src}
                   alt={`Simon Leviev Cinematic Moment ${i + 1}`}

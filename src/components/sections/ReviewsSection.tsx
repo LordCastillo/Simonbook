@@ -1,6 +1,10 @@
+import { useRef } from 'react';
 import { FadeIn } from '../animations/FadeIn';
+import { useMarqueePlayback } from '../../hooks/useMarqueePlayback';
 
 export function ReviewsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
   const reviews = [
     {
       text: "The most gripping autobiography I've ever read. Simon's storytelling pulls you into a world you can't look away from. Unforgettable.",
@@ -39,19 +43,24 @@ export function ReviewsSection() {
   // Double the reviews for seamless loop
   const duplicatedReviews = [...reviews, ...reviews];
 
+  useMarqueePlayback(sectionRef, marqueeRef);
+
   return (
-    <section id="reviews" className="py-[80px] lg:py-[120px] relative overflow-hidden">
+    <section ref={sectionRef} id="reviews" className="py-[80px] lg:py-[120px] relative overflow-hidden">
       <FadeIn className="text-center mb-[50px] lg:mb-[70px] px-8 md:px-[60px]">
         <p className="font-ui text-[0.7rem] tracking-[5px] uppercase text-gold mb-3">Reader Reviews</p>
         <h2 className="font-display text-[2.4rem] lg:text-[clamp(2.4rem,4vw,3.6rem)] font-black text-beige-light">What The <span className="text-gold italic">World</span> Is Saying</h2>
       </FadeIn>
 
       <div className="relative flex overflow-hidden group">
-        <div className="flex w-max gap-6 whitespace-nowrap py-10 animate-marquee [animation-duration:50s] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+        <div
+          ref={marqueeRef}
+          className="marquee-track flex w-max gap-6 whitespace-nowrap py-10 animate-marquee [animation-duration:68s] motion-reduce:animate-none"
+        >
           {duplicatedReviews.map((review, i) => (
             <div 
               key={i} 
-              className="w-[320px] sm:w-[450px] bg-glass-bg border border-glass-border rounded-[4px] p-8 sm:p-[45px_35px] backdrop-blur-md transition-all duration-500 hover:border-gold/40 hover:bg-glass-hover hover:shadow-[0_30px_70px_rgba(0,0,0,0.6)] group/card"
+              className="w-[320px] sm:w-[450px] bg-[rgba(10,10,10,0.82)] border border-glass-border rounded-[4px] p-8 sm:p-[45px_35px] transition-colors duration-300 hover:border-gold/40 hover:bg-glass-hover group/card [contain:layout_paint]"
             >
               <div className="text-gold text-[0.9rem] tracking-[3px] mb-4 opacity-80">★★★★★</div>
               <p className="font-body italic text-[1.05rem] sm:text-[1.2rem] text-beige/80 mb-6 leading-[1.7] whitespace-normal">

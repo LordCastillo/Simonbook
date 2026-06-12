@@ -54,11 +54,21 @@ html.lenis body {
 }
 
 @supports (content-visibility: auto) {
-  main > section:not(#hero),
+  main > section:not(#hero):not(#life):not(#reviews),
   footer {
     content-visibility: auto;
     contain-intrinsic-size: auto 900px;
   }
+}
+
+.marquee-track {
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.marquee-paused {
+  animation-play-state: paused !important;
 }
 
 @media (max-width: 767px) {
